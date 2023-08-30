@@ -1,0 +1,89 @@
+<app-banner title="SignUp"></app-banner>
+{{y | reverse}}
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="signupForm">
+          <div class="form-group">
+            <input type="text" formControlName="firstName" class="form-control text-center" placeholder="First Name">
+          </div>
+          <div *ngIf="signupForm.controls['firstName'].invalid && (
+            signupForm.controls['firstName'].touched ||  signupForm.controls['firstName'].dirty 
+          )">
+                <div *ngIf="signupForm.controls['firstName'].errors.required">
+                  FirstName is required
+                </div>
+                <div *ngIf="signupForm.controls['firstName'].errors.minlength">
+                  FirstName must have at least 3 chars
+                </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="lastName" class="form-control text-center" placeholder="Last Name">
+          </div>
+          <div *ngIf="signupForm.controls['lastName'].invalid && (
+            signupForm.controls['lastName'].touched ||  signupForm.controls['lastName'].dirty 
+          )">
+                <div *ngIf="signupForm.controls['lastName'].errors.required">
+                  lastName is required
+                </div>
+                <div *ngIf="signupForm.controls['lastName'].errors.minlength">
+                  lastName must have at least 3 chars
+                </div>
+          </div>
+
+          <div class="form-group">
+            <input type="email" formControlName="email" class="form-control text-center" placeholder="Email">
+          </div>
+          <span style="color: red;">{{errorMsg}}</span>
+          <div *ngIf="signupForm.controls['email'].invalid && (
+            signupForm.controls['email'].touched ||  signupForm.controls['email'].dirty 
+          )">
+                <div *ngIf="signupForm.controls['email'].errors.required">
+                  email is required
+                </div>
+                <div *ngIf="signupForm.controls['email'].errors.minlength">
+                  email must have at least 3 chars
+                </div>
+          </div>
+
+          <div class="form-group">
+            <input type="password" formControlName="pwd" class="form-control text-center" placeholder="Password">
+          </div>
+          <div *ngIf="signupForm.controls['pwd'].invalid && (
+            signupForm.controls['pwd'].touched ||  signupForm.controls['pwd'].dirty 
+          )">
+                <div *ngIf="signupForm.controls['pwd'].errors.required">
+                  pwd is required
+                </div>
+                <div *ngIf="signupForm.controls['pwd'].errors.minlength">
+                  pwd must have at least 6 chars
+                </div>
+                <div *ngIf="signupForm.controls['pwd'].errors.maxlength">
+                  pwd must have at tool 12 chars
+                </div>
+          </div>
+
+          <div class="form-group">
+            <input type="number" formControlName="tel" class="form-control text-center" placeholder="Tel">
+          </div>
+          <div class="form-group" style="visibility: hidden;">
+            <input type="file"  class="form-control text-center" #filePicker (change)="onImageSelected($event)">
+          </div>
+          <div class="text-center mb-5">
+            <button class="btn btn-warning" (click)="filePicker.click()">Select your avatar</button>
+          </div>
+          <div class="text-center">
+            <img [src]="imagePreview" *ngIf="imagePreview" alt="" width="200px" height="200px">
+          </div>
+          <div class="form-group text-center">
+            <input type="submit" (click)="signup()" class="btn btn-primary py-3 px-5" value="SignUp">
+          </div>
+        </form>  
+        {{signupForm.value | json}} <br> {{signupForm.valid | json}} <br> 
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<app-banner title="Search-Team-Stadium"></app-banner>
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="searchteamstadiumForm">
+          <div class="form-group">
+            <input type="text" formControlName="stadiumName" name="stadiumName" class="form-control text-center" placeholder="First Name">
+          </div>
+          <div *ngIf="searchteamstadiumForm.controls['stadiumName'].invalid && (
+            searchteamstadiumForm.controls['stadiumName'].touched ||  searchteamstadiumForm.controls['stadiumName'].dirty 
+          )">
+                <div *ngIf="searchteamstadiumForm.controls['stadiumName'].errors.required">
+                  Stadium Name is required
+                </div>
+                <div *ngIf="searchteamstadiumForm.controls['stadiumName'].errors.minlength">
+                  Stadium Name must have at least 3 chars
+                </div>
+          </div>
+
+          
+          <div class="form-group text-center">
+            <input type="submit" (click)="SearchTeamStadium()" [disabled]="searchteamstadiumForm.invalid" class="btn btn-primary py-3 px-5" value="Search">
+          </div>
+        </form>  
+      <div *ngIf="!errorMsg ">
+        <p>Team Name : {{findedTeam.name}}</p>
+        <p>Team owner : {{findedTeam.owner}}</p>
+      </div>
+      <div *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
